@@ -4,13 +4,8 @@
 #include<sys/socket.h>
 #include<string.h>
 void commun(int sock){
-	char buf[256];
-	int len_r;
-	char*message = "‚ ";
+	char*message = "Hello server!";
 	send(sock,message,strlen(message),0);
-	len_r = recv(sock,buf,256,0);
-	buf[len_r] = '\0';
-	printf("%s\n",buf);
 }
 int main(int atgc,char **argr){
 	int sock = socket(PF_INET,SOCK_STREAM,0);
