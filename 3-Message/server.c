@@ -19,14 +19,6 @@ int main(int argc, char *argv[])
     int cliSock;
 
     int servSock = prepare_server_socket(10001);
-    //int servSock = socket(PF_INET, SOCK_STREAM, 0);
-
-    //struct sockaddr_in servAddress;   /*�҂���*/
-
-    //servAddress.sin_family = AF_INET;
-    //servAddress.sin_addr.s_addr = htonl(INADDR_ANY);
-    //servAddress.sin_port = htons(10001);
-    //bind(servSock, (struct sockaddr *)&servAddress, sizeof(servAddress));
 
     listen(servSock, 5);
     while (1)
