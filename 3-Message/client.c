@@ -131,7 +131,7 @@ void commun(int sock)
         return;
     }
 
-    printf("%lu バイト\n", sizeof(char) * strlen(msg));
+    printf("%lu バイト\n", sizeof(msg) * strlen(msg));
 
     // 送信処理
     if (send(sock, msg, strlen(msg), 0) != strlen(msg))
