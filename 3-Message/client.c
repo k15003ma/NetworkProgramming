@@ -15,6 +15,12 @@ void my_scanf(char *, int);
 void commun(int);
 void read_until_delim(int, char *, char, int);
 
+struct money
+{
+    int deposit;
+    int withdraw;
+};
+
 int main(int argc, char *argv[])
 {
     // 実行時にはサーバのIPアドレスとポートを添えなければならない
