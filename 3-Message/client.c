@@ -139,10 +139,10 @@ void commun(int sock)
         return;
     }
 
-    printf("%lu バイト\n", sizeof(msg) * strlen(msg));
+    printf("%lu バイト\n", sizeof(msgMoney));
 
     // 送信処理
-    if (send(sock, msgMoney, sizeof(msgMoney), 0) != sizeof(msgMoney))
+    if (send(sock, &msgMoney, sizeof(msgMoney), 0) != sizeof(msgMoney))
         DieWithError("send() sent a message of unexpected bytes");
 
     // 受信処理
