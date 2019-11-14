@@ -100,12 +100,26 @@ void read_until_delim(int sock, char *buf, char delimiter, int max_length)
     buf[index_letter] = '\0';
 }
 
+// 特定のバイト数だけ受信する
+void read_certain_bytes(int sock, void *buf, int length)
+{
+    int len_r = 0;
+    int len_sum = 0;
+
+    while (len_sum < length)
+    {
+        if ((len_r = recv(sock, buf + len_sum, length - len_sum, 0)) <= 0)
+            DieWithError("recv() failed");
+        len_sum += len_r;
+    }
+}
+
 void commun(int sock)
 {
-    char cmd[2] = ""; // コマンド入力用
-    struct money msgMoney;
-    char money[BUF_SIZE]; // 送信メッセージ
-    int result;
+    char cmd[2] = "";      // コマンド入力用
+    struct money msgMoney; // 引き出し額/預け入れ額
+    char money[BUF_SIZE];  // 金額入力用
+    int result;            // 結果
 
     printf("0:引き出し　1:預け入れ　2:残高照会　9:終了\n");
     printf("何をしますか？ > ");
@@ -147,19 +161,7 @@ void commun(int sock)
 
     // 受信処理
     read_certain_bytes(sock, &result, (int)sizeof(int));
+
     // 表示処理
     printf("残高は%d円になりました\n", result);
-}
-
-void read_certain_bytes(int sock, void *buf, int length)
-{
-    int len_r = 0;
-    int len_sum = 0;
-
-    while (len_sum < length)
-    {
-        if ((len_r = recv(sock, buf + len_sum, length - len_sum, 0)) <= 0)
-            DieWithError("recv() failed");
-        len_sum += len_r;
-    }
 }
